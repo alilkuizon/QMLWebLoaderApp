@@ -1,11 +1,11 @@
 QT += quick
 
-SOURCES += \
-        main.cpp
+QMAKE_CXXFLAGS += -Wunused-parameter -Werror
 
-resources.files = main.qml 
-resources.prefix = /$${TARGET}
-RESOURCES += resources
+SOURCES += \
+        main.cpp \
+
+RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
