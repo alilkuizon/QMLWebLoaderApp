@@ -2,28 +2,19 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
+#include <mainviewmodel.h>
 #include <qmlloader.h>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    QQuickView view;
-    view.setTitle("QML Web Loader App");
-    view.setWidth(640);
-    view.setHeight(480);
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.show();
 
-    QMLLoader qmlLoader(&view);
+    QMLLoader qmlLoader;
     qmlLoader.fetchAvailableQMLFiles();
-    // QStringList qmlList = qmlLoader.fetchAvailableQMLFiles();
 
-    // for (const QString& item : qmlList) {
-    //     qDebug() << "Item:" << item;
-    // }
-
-    QUrl qmlUrl1("qrc:/qml/main.qml");
-    view.setSource(qmlUrl1);
+    QQuickView view;
+    MainViewModel viewModel(&view);
+    viewModel.renderView();
 
     return app.exec();
 }
