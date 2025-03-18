@@ -1,11 +1,14 @@
 QT += quick
-
+TARGET = QMLWebLoader  # Sets the executable name
+DESTDIR = $$PWD/build
 QMAKE_CXXFLAGS += -Wunused-parameter -Werror
+
+HEADERS += \
+    qmlloader.h
 
 SOURCES += \
         main.cpp \
-
-RESOURCES += qml.qrc
+    qmlloader.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -17,3 +20,5 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+

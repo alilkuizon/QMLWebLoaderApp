@@ -1,22 +1,29 @@
+#include <QDir>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
+#include <qmlloader.h>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    QQuickView view;
+    view.setTitle("QML Web Loader App");
+    view.setWidth(640);
+    view.setHeight(480);
+    view.setResizeMode(QQuickView::SizeRootObjectToView);
+    view.show();
 
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(
-        &engine,
-        &QQmlApplicationEngine::objectCreated,
-        &app,
-        [url](QObject *obj, const QUrl &objUrl) {
-            if (!obj && url == objUrl)
-                QCoreApplication::exit(-1);
-        },
-        Qt::QueuedConnection);
-    engine.load(url);
+    QMLLoader qmlLoader(&view);
+    qmlLoader.fetchAvailableQMLFiles();
+    // QStringList qmlList = qmlLoader.fetchAvailableQMLFiles();
+
+    // for (const QString& item : qmlList) {
+    //     qDebug() << "Item:" << item;
+    // }
+
+    QUrl qmlUrl1("qrc:/qml/main.qml");
+    view.setSource(qmlUrl1);
 
     return app.exec();
 }
