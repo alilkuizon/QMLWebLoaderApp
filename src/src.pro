@@ -5,12 +5,12 @@ QMAKE_CXXFLAGS += -Wunused-parameter -Werror
 
 HEADERS += \
     mainviewmodel.h \
-    qmlloader.h
+    webserver.h
 
 SOURCES += \
         main.cpp \
     mainviewmodel.cpp \
-    qmlloader.cpp
+    webserver.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

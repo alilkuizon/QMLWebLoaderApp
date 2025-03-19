@@ -7,5 +7,4 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_httpservercommunicationtest.cpp
-
+SOURCES +=  tst_functionaltest.cpp

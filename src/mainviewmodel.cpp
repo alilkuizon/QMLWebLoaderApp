@@ -14,9 +14,7 @@ void MainViewModel::renderView()
     view->setWidth(640);
     view->setHeight(480);
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    QUrl qmlUrl1("../../qml/main.qml");
     view->rootContext()->setContextProperty("viewModel", this);
-    view->setSource(qmlUrl1);
     view->show();
 }
 

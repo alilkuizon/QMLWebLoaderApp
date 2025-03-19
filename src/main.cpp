@@ -3,18 +3,18 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <mainviewmodel.h>
-#include <qmlloader.h>
+#include <webserver.h>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    QMLLoader qmlLoader;
-    qmlLoader.fetchAvailableQMLFiles();
-
     QQuickView view;
     MainViewModel viewModel(&view);
     viewModel.renderView();
+
+    WebServer server(&view);
+    server.findServerPort();
 
     return app.exec();
 }

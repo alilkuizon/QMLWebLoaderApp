@@ -1,4 +1,6 @@
+include(../../src/src.pri)
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    ViewModelFunctionalityTest \
     WebserverCommunicationTest
