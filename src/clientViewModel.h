@@ -1,5 +1,5 @@
-#ifndef MAINVIEWMODEL_H
-#define MAINVIEWMODEL_H
+#ifndef CLIENTVIEWMODEL_H
+#define CLIENTVIEWMODEL_H
 
 #include <QObject>
 #include <QQmlContext>
@@ -7,14 +7,21 @@
 #include <QQuickView>
 #include <QTimer>
 
-class MainViewModel : public QObject
+#ifdef Q_OS_LINUX
+#include <libudev.h>
+#elif defined(Q_OS_MACOS)
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/IOUSBLib.h>
+#endif
+
+class ClientViewModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString elapsedTime READ elapsedTime NOTIFY elapsedTimeChanged FINAL)
     Q_PROPERTY(bool isTimerActive READ isTimerActive NOTIFY timerStatusChanged FINAL)
     Q_PROPERTY(QStringList devices READ devices NOTIFY devicesChanged)
   public:
-    explicit MainViewModel(QQuickView *, QObject *parent = nullptr);
+    explicit ClientViewModel(QQuickView *, QObject *parent = nullptr);
     void renderView();
 
     Q_INVOKABLE void toggleTimer();
@@ -31,7 +38,7 @@ class MainViewModel : public QObject
     int timerCount;
     QStringList m_devices;
 
-  private slots:
+  public slots:
     void onTimeOut();
   signals:
     void elapsedTimeChanged();
@@ -39,4 +46,4 @@ class MainViewModel : public QObject
     void devicesChanged();
 };
 
-#endif // MAINVIEWMODEL_H
+#endif // CLIENTVIEWMODEL_H

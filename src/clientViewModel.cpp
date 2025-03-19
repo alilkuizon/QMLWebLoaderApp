@@ -1,14 +1,14 @@
-#include "mainviewmodel.h"
+#include "clientViewModel.h"
 #include <QDebug>
 
-MainViewModel::MainViewModel(QQuickView *mView, QObject *) : view(mView)
+ClientViewModel::ClientViewModel(QQuickView *mView, QObject *) : view(mView)
 {
     timerCount = 0;
-    connect(&timer, &QTimer::timeout, this, &MainViewModel::onTimeOut);
+    connect(&timer, &QTimer::timeout, this, &ClientViewModel::onTimeOut);
     timer.setInterval(1000);
 }
 
-void MainViewModel::renderView()
+void ClientViewModel::renderView()
 {
     view->setTitle("QML Web Loader App");
     view->setWidth(640);
@@ -18,12 +18,12 @@ void MainViewModel::renderView()
     view->show();
 }
 
-QString MainViewModel::elapsedTime() const
+QString ClientViewModel::elapsedTime() const
 {
     return QString::number(timerCount);
 }
 
-void MainViewModel::toggleTimer()
+void ClientViewModel::toggleTimer()
 {
     qDebug() << "Timer toggled";
     if (timer.isActive())
@@ -39,7 +39,7 @@ void MainViewModel::toggleTimer()
     emit timerStatusChanged();
 }
 
-void MainViewModel::fetchUSBDeviceList()
+void ClientViewModel::fetchUSBDeviceList()
 {
     m_devices.clear();
 
@@ -60,17 +60,17 @@ void MainViewModel::fetchUSBDeviceList()
     emit devicesChanged();
 }
 
-bool MainViewModel::isTimerActive() const
+bool ClientViewModel::isTimerActive() const
 {
     return timer.isActive();
 }
 
-QStringList MainViewModel::devices() const
+QStringList ClientViewModel::devices() const
 {
     return m_devices;
 }
 
-void MainViewModel::onTimeOut()
+void ClientViewModel::onTimeOut()
 {
     timerCount += 1;
     emit elapsedTimeChanged();

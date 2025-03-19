@@ -1,13 +1,15 @@
-#include <QtTest>
-#include <mainviewmodel.h>
+#include <QObject>
+#include <QQuickView>
+#include <QTest>
+#include <clientViewModel.h>
 
 class functionalTest : public QObject
 {
     Q_OBJECT
 
   public:
-    functionalTest();
-    ~functionalTest();
+    functionalTest() {}
+    ~functionalTest() {}
 
   private slots:
     void initTestCase();
@@ -15,19 +17,26 @@ class functionalTest : public QObject
     void test_case1();
 };
 
-functionalTest::functionalTest()
-{
-    MainViewModel viewModel;
-}
-
-functionalTest::~functionalTest() {}
-
 void functionalTest::initTestCase() {}
 
 void functionalTest::cleanupTestCase() {}
 
-void functionalTest::test_case1() {}
+void functionalTest::test_case1()
+{
+    // Check Initial Timer Status
+    QQuickView view;
+    ClientViewModel viewModel(&view);
+    QCOMPARE_EQ(viewModel.isTimerActive(), false);
+    viewModel.toggleTimer();
+    QCOMPARE_EQ(viewModel.isTimerActive(), true);
 
-QTEST_APPLESS_MAIN(functionalTest)
+    // Check elapsed time increment functionality
+    viewModel.onTimeOut();
+    QCOMPARE_EQ(viewModel.elapsedTime(), QString::number(1));
+    viewModel.onTimeOut();
+    QCOMPARE_EQ(viewModel.elapsedTime(), QString::number(2));
+}
+
+QTEST_MAIN(functionalTest)
 
 #include "tst_functionaltest.moc"

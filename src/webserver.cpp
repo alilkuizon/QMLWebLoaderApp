@@ -7,7 +7,6 @@ WebServer::WebServer(QQuickView *view, QObject *)
 
 WebServer::~WebServer()
 {
-
     QString tempFilePath =
         QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/downloaded.qml";
     QFile::remove(tempFilePath);

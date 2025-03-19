@@ -4,12 +4,12 @@ DESTDIR = $$PWD/build
 QMAKE_CXXFLAGS += -Wunused-parameter -Werror
 
 HEADERS += \
-    mainviewmodel.h \
+    clientViewModel.h \
     webserver.h
 
 SOURCES += \
+    clientViewModel.cpp \
         main.cpp \
-    mainviewmodel.cpp \
     webserver.cpp
 
 # Additional import path used to resolve QML modules in Qt Creator's code model

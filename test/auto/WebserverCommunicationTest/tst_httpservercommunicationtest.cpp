@@ -1,4 +1,4 @@
-#include <QtTest>
+#include <QTest>
 
 // add necessary includes here
 

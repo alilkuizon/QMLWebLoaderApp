@@ -1,5 +1,5 @@
-QT += testlib
-QT -= gui
+QT += core gui qml quick testlib
+# QT -= gui
 
 include(../../../src/src.pri)
 CONFIG += qt console warn_on depend_includepath testcase

@@ -1,4 +1,3 @@
-QT += quick
 TEMPLATE = subdirs
 
 SUBDIRS += \
