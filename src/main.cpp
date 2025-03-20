@@ -11,10 +11,9 @@ int main(int argc, char *argv[])
 
     QQuickView view;
     ClientViewModel viewModel(&view);
-    viewModel.renderView();
-
     WebServer server(&view);
-    server.findServerPort();
+    viewModel.connecttoWebServer(&server);
+    viewModel.renderView();
 
     return app.exec();
 }

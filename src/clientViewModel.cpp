@@ -18,6 +18,12 @@ void ClientViewModel::renderView()
     view->show();
 }
 
+void ClientViewModel::connecttoWebServer(WebServer *newserver)
+{
+    server = newserver;
+    server->findServerPort();
+}
+
 QString ClientViewModel::elapsedTime() const
 {
     return QString::number(timerCount);
@@ -43,38 +49,15 @@ void ClientViewModel::fetchUSBDeviceList()
 {
     m_devices.clear();
     m_devices = getUsbDevicesList();
-
-    // QString deviceInfo = QString("Vendor: ") + QString("vendor") + QString(" Product: ") +
-    //                      QString("product") + QString("product") + QString("product") +
-    //                      QString("product") + QString("product");
-    // m_devices.append(deviceInfo);
-
-    // QString deviceInfo1 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo1);
-
-    // QString deviceInfo9 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo9);
-
-    // QString deviceInfo8 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo8);
-
-    // QString deviceInfo7 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo7);
-
-    // QString deviceInfo6 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo6);
-
-    // QString deviceInfo5 =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo5);
-
     emit devicesChanged();
 }
+
+void ClientViewModel::exit()
+{
+    server->exit();
+}
+
+void ClientViewModel::cleanup() {}
 
 bool ClientViewModel::isTimerActive() const
 {
@@ -113,28 +96,6 @@ QStringList ClientViewModel::getUsbDevicesList()
 
         if (dev)
         {
-            // const char *vendor = udev_device_get_sysattr_value(dev, "idVendor");
-            // const char *product = udev_device_get_sysattr_value(dev, "idProduct");
-            // const char *manufacturer = udev_device_get_sysattr_value(dev, "manufacturer");
-            // const char *product_name = udev_device_get_sysattr_value(dev, "product");
-
-            // QString deviceInfo;
-            // if (manufacturer && product_name)
-            // {
-            //     deviceInfo = QString("%1 %2").arg(manufacturer, product_name);
-            // }
-            // else if (vendor && product)
-            // {
-            //     deviceInfo = QString("Vendor: %1, Product: %2").arg(vendor, product);
-            // }
-            // else
-            // {
-            //     deviceInfo = QString("Unknown USB device at %1").arg(path);
-            // }
-
-            // deviceList.append(deviceInfo);
-            // udev_device_unref(dev);
-
             const char *vendor = udev_device_get_sysattr_value(dev, "idVendor");   // Vendor ID
             const char *product = udev_device_get_sysattr_value(dev, "idProduct"); // Product ID
             const char *manufacturer =

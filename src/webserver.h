@@ -1,6 +1,7 @@
 #ifndef WEBSERVER_H
 #define WEBSERVER_H
 
+#include <QCoreApplication>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -18,6 +19,7 @@ class WebServer : public QObject
     ~WebServer();
     void findServerPort();
     void loadQmlFromServer(const QString &qmlFilename);
+    void exit();
 
   private:
     QQuickView *m_view;

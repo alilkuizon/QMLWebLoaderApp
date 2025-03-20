@@ -88,3 +88,31 @@ void WebServer::onQmlDownloaded()
         qWarning() << "Failed to write QML to temp file!";
     }
 }
+
+void WebServer::exit()
+{
+    if (m_serverPort.isEmpty())
+    {
+        qWarning() << "Server port not found, exiting application.";
+        QCoreApplication::quit();
+        return;
+    }
+
+    QUrl url(QString("http://localhost:%1/api/v1/shutdown").arg(m_serverPort));
+    QNetworkRequest request(url);
+    QNetworkReply *reply = m_networkManager->post(request, QByteArray());
+
+    connect(reply, &QNetworkReply::finished, [reply]() {
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            qWarning() << "Failed to shut down server:" << reply->errorString();
+        }
+        else
+        {
+            qDebug() << "Server shutdown request sent successfully.";
+        }
+
+        reply->deleteLater();
+        QCoreApplication::quit(); // Quit the Qt application
+    });
+}

@@ -6,6 +6,7 @@
 #include <QQmlEngine>
 #include <QQuickView>
 #include <QTimer>
+#include <webserver.h>
 
 #ifdef Q_OS_LINUX
 #include <libudev.h>
@@ -23,9 +24,12 @@ class ClientViewModel : public QObject
   public:
     explicit ClientViewModel(QQuickView *, QObject *parent = nullptr);
     void renderView();
+    void connecttoWebServer(WebServer *server);
 
     Q_INVOKABLE void toggleTimer();
     Q_INVOKABLE void fetchUSBDeviceList();
+    Q_INVOKABLE void exit();
+    Q_INVOKABLE void cleanup();
 
     QString elapsedTime() const;
     bool isTimerActive() const;
@@ -33,6 +37,7 @@ class ClientViewModel : public QObject
 
   private:
     QQuickView *view;
+    WebServer *server;
     QString m_elapsedTime;
     QTimer timer;
     int timerCount;
