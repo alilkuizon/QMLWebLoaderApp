@@ -1,5 +1,5 @@
-QT += testlib
-QT -= gui
+QT += core gui qml quick testlib
+# QT -= gui
 
 include(../../../src/src.pri)
 CONFIG += qt console warn_on depend_includepath testcase
@@ -7,5 +7,4 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_httpservercommunicationtest.cpp
-
+SOURCES +=  tst_functionaltest.cpp
