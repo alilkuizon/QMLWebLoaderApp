@@ -10,27 +10,34 @@ CONTAINER_DIR="/project"                                    # Directory inside c
 DOCKER_IMAGE="qt6.6.3-ubuntu22"                                   # Your pre-built Qt6 image name
 BINARY_NAME="${PRO_FILE%.pro}" 
 
-# Always run the Docker installation script
-echo "Ensuring Docker is installed..."
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+# Install Docker Engine on Ubuntu
+echo "Installing Docker Engine..."
 
-# # Check if Docker is installed
-# if ! command -v docker &> /dev/null; then
-#     echo "Docker is not installed. Installing Docker now..."
-    
-#     # Download and install Docker
-#     curl -fsSL https://get.docker.com -o get-docker.sh
-#     sh get-docker.sh
-    
-#     # Verify installation
-#     if ! command -v docker &> /dev/null; then
-#         echo "Docker installation failed. Please install manually."
-#         exit 1
-#     fi
+# Update the apt package index and install packages to allow apt to use a repository over HTTPS
+sudo apt-get update
+sudo apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg
 
-#     echo "Docker installed successfully."
-# fi
+# Add Docker’s official GPG key
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Set up the repository
+echo \
+  "deb [arch=\"$(dpkg --print-architecture)\" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Update the apt package index again
+sudo apt-get update
+
+# Install Docker packages
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Verify that Docker Engine is installed correctly
+sudo docker run hello-world
 
 # Check if the Docker image exists locally
 if [[ "$(docker images -q "$DOCKER_IMAGE" 2> /dev/null)" == "" ]]; then
@@ -56,7 +63,7 @@ echo "Pro file location: $PRO_FILE_DIR/$PRO_FILE"
 echo "Output directory: $OUTPUT_DIR"
 
 # Run Docker container with Qt6
-docker run --rm -it \
+sudo docker run --rm -it \
     -v "$PROJECT_DIR:$CONTAINER_DIR" \
     --workdir "$CONTAINER_DIR" \
     "$DOCKER_IMAGE" \
