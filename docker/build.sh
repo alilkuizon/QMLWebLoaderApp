@@ -66,16 +66,29 @@ docker run --rm -it \
 
 echo "Process completed."
 
-# Run the binary in the background
+# # Run the binary in the background
+# if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
+#     echo "Starting $BINARY_NAME in the background..."
+#     cd "$OUTPUT_DIR" && ./$BINARY_NAME &
+#     BINARY_PID=$!
+#     echo "$BINARY_NAME started with PID: $BINARY_PID"
+    
+#     # Optional: Write the PID to a file for later use (stopping the process)
+#     echo $BINARY_PID > "$OUTPUT_DIR/.${BINARY_NAME}.pid"
+#     echo "PID saved to $OUTPUT_DIR/.${BINARY_NAME}.pid"
+# else
+#     echo "Cannot start $BINARY_NAME: Binary not found in $OUTPUT_DIR"
+# fi
+
+# Check if the binary exists
 if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
     echo "Starting $BINARY_NAME in the background..."
-    cd "$OUTPUT_DIR" && ./$BINARY_NAME &
-    BINARY_PID=$!
-    echo "$BINARY_NAME started with PID: $BINARY_PID"
-    
-    # Optional: Write the PID to a file for later use (stopping the process)
-    echo $BINARY_PID > "$OUTPUT_DIR/.${BINARY_NAME}.pid"
-    echo "PID saved to $OUTPUT_DIR/.${BINARY_NAME}.pid"
+    cd "$OUTPUT_DIR" || exit 1
+    nohup "./$BINARY_NAME" > /dev/null 2>&1 &
+    echo "$BINARY_NAME has been started."
 else
     echo "Cannot start $BINARY_NAME: Binary not found in $OUTPUT_DIR"
 fi
+
+# Exit the script
+exit 0

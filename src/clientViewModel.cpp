@@ -11,7 +11,7 @@ ClientViewModel::ClientViewModel(QQuickView *mView, QObject *) : view(mView)
 void ClientViewModel::renderView()
 {
     view->setTitle("QML Web Loader App");
-    view->setWidth(640);
+    view->setWidth(800);
     view->setHeight(480);
     view->setResizeMode(QQuickView::SizeRootObjectToView);
     view->rootContext()->setContextProperty("viewModel", this);

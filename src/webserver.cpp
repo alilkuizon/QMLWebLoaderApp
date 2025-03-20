@@ -14,7 +14,7 @@ WebServer::~WebServer()
 
 void WebServer::findServerPort()
 {
-    QFile portFile("server_port.txt");
+    QFile portFile("../server_port.txt");
     if (portFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         m_serverPort = portFile.readAll().trimmed();
