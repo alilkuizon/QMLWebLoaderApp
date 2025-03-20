@@ -40,12 +40,12 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo docker run hello-world
 
 # Check if the Docker image exists locally
-if [[ "$(docker images -q "$DOCKER_IMAGE" 2> /dev/null)" == "" ]]; then
+if [[ "$(sudo docker images -q "$DOCKER_IMAGE" 2> /dev/null)" == "" ]]; then
     echo "Docker image '$DOCKER_IMAGE' not found locally. Building from Dockerfile..."
 
     # Check if Dockerfile exists in the script directory
     if [[ -f "$SCRIPT_DIR/Dockerfile" ]]; then
-        docker build -t "$DOCKER_IMAGE" "$SCRIPT_DIR"
+        sudo docker build -t "$DOCKER_IMAGE" "$SCRIPT_DIR"
         echo "Docker image '$DOCKER_IMAGE' built successfully."
     else
         echo "Dockerfile not found in '$SCRIPT_DIR'. Cannot build Docker image."
