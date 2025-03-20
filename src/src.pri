@@ -6,3 +6,8 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/clientViewModel.h
+
+unix {
+    LIBS += -ludev
+    INCLUDEPATH += /usr/include/libudev
+}

@@ -38,6 +38,8 @@ class ClientViewModel : public QObject
     int timerCount;
     QStringList m_devices;
 
+    QStringList getUsbDevicesList();
+
   public slots:
     void onTimeOut();
   signals:

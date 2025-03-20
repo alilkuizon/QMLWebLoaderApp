@@ -1,6 +1,6 @@
 QT += quick
-TARGET = QMLWebLoader  # Sets the executable name
-DESTDIR = $$PWD/build
+TARGET = QMLWebLoaderApp  # Sets the executable name
+DESTDIR = $$PWD/../binaries
 QMAKE_CXXFLAGS += -Wunused-parameter -Werror
 
 HEADERS += \
@@ -23,4 +23,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+unix {
+    LIBS += -ludev
+    INCLUDEPATH += /usr/include/libudev
+}
 
