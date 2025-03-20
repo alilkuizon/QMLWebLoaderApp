@@ -12,8 +12,19 @@ BINARY_NAME="${PRO_FILE%.pro}"
 
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
-    echo "Docker is not installed. Please install Docker first."
-    exit 1
+    echo "Docker is not installed. Installing Docker now..."
+    
+    # Download and install Docker
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    
+    # Verify installation
+    if ! command -v docker &> /dev/null; then
+        echo "Docker installation failed. Please install manually."
+        exit 1
+    fi
+
+    echo "Docker installed successfully."
 fi
 
 # Check if the Docker image exists locally
@@ -65,20 +76,6 @@ docker run --rm -it \
     "
 
 echo "Process completed."
-
-# # Run the binary in the background
-# if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
-#     echo "Starting $BINARY_NAME in the background..."
-#     cd "$OUTPUT_DIR" && ./$BINARY_NAME &
-#     BINARY_PID=$!
-#     echo "$BINARY_NAME started with PID: $BINARY_PID"
-    
-#     # Optional: Write the PID to a file for later use (stopping the process)
-#     echo $BINARY_PID > "$OUTPUT_DIR/.${BINARY_NAME}.pid"
-#     echo "PID saved to $OUTPUT_DIR/.${BINARY_NAME}.pid"
-# else
-#     echo "Cannot start $BINARY_NAME: Binary not found in $OUTPUT_DIR"
-# fi
 
 # Check if the binary exists
 if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
