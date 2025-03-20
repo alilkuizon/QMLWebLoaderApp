@@ -10,22 +10,27 @@ CONTAINER_DIR="/project"                                    # Directory inside c
 DOCKER_IMAGE="qt6.6.3-ubuntu22"                                   # Your pre-built Qt6 image name
 BINARY_NAME="${PRO_FILE%.pro}" 
 
-# Check if Docker is installed
-if ! command -v docker &> /dev/null; then
-    echo "Docker is not installed. Installing Docker now..."
-    
-    # Download and install Docker
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sh get-docker.sh
-    
-    # Verify installation
-    if ! command -v docker &> /dev/null; then
-        echo "Docker installation failed. Please install manually."
-        exit 1
-    fi
+# Always run the Docker installation script
+echo "Ensuring Docker is installed..."
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 
-    echo "Docker installed successfully."
-fi
+# # Check if Docker is installed
+# if ! command -v docker &> /dev/null; then
+#     echo "Docker is not installed. Installing Docker now..."
+    
+#     # Download and install Docker
+#     curl -fsSL https://get.docker.com -o get-docker.sh
+#     sh get-docker.sh
+    
+#     # Verify installation
+#     if ! command -v docker &> /dev/null; then
+#         echo "Docker installation failed. Please install manually."
+#         exit 1
+#     fi
+
+#     echo "Docker installed successfully."
+# fi
 
 # Check if the Docker image exists locally
 if [[ "$(docker images -q "$DOCKER_IMAGE" 2> /dev/null)" == "" ]]; then
