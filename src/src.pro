@@ -26,5 +26,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 unix {
     LIBS += -ludev
     INCLUDEPATH += /usr/include/libudev
+
+    QMAKE_POST_LINK += chmod 755 $$DESTDIR/$$TARGET
 }
 

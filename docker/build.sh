@@ -8,6 +8,7 @@ PRO_FILE="QMLWebLoaderApp.pro"                                      # Name of th
 OUTPUT_DIR="$PROJECT_DIR/binaries"                          # Output directory for binaries
 CONTAINER_DIR="/project"                                    # Directory inside container
 DOCKER_IMAGE="qt682-ubuntu22"                                   # Your pre-built Qt6 image name
+BINARY_NAME="${PRO_FILE%.pro}" 
 
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
@@ -39,14 +40,21 @@ docker run --rm -it \
         # Run make
         make -j\$(nproc) && \
         
-        # Create binaries directory if it doesn't exist
-        mkdir -p ../binaries && \
-        
-        # Copy binary to output directory
-        # Assuming the binary name is the same as the project name without .pro
-        BINARY_NAME=\$(basename ../$PRO_FILE .pro) && \
-        cp \$BINARY_NAME ../binaries/ && \
         echo \"Build completed. Binary copied to binaries/\$BINARY_NAME\"
     "
 
 echo "Process completed."
+
+# Run the binary in the background
+if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
+    echo "Starting $BINARY_NAME in the background..."
+    cd "$OUTPUT_DIR" && ./$BINARY_NAME &
+    BINARY_PID=$!
+    echo "$BINARY_NAME started with PID: $BINARY_PID"
+    
+    # Optional: Write the PID to a file for later use (stopping the process)
+    echo $BINARY_PID > "$OUTPUT_DIR/.${BINARY_NAME}.pid"
+    echo "PID saved to $OUTPUT_DIR/.${BINARY_NAME}.pid"
+else
+    echo "Cannot start $BINARY_NAME: Binary not found in $OUTPUT_DIR"
+fi
