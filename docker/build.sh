@@ -7,7 +7,7 @@ PRO_FILE_DIR="$PROJECT_DIR"                                 # Directory containi
 PRO_FILE="QMLWebLoaderApp.pro"                                      # Name of the .pro file (change as needed)
 OUTPUT_DIR="$PROJECT_DIR/binaries"                          # Output directory for binaries
 CONTAINER_DIR="/project"                                    # Directory inside container
-DOCKER_IMAGE="qt682-ubuntu22"                                   # Your pre-built Qt6 image name
+DOCKER_IMAGE="qt6.6.3-ubuntu22"                                   # Your pre-built Qt6 image name
 BINARY_NAME="${PRO_FILE%.pro}" 
 
 # Check if Docker is installed
@@ -39,6 +39,12 @@ docker run --rm -it \
         
         # Run make
         make -j\$(nproc) && \
+        
+        # Copy the gcc_64 folder from the Qt installation to the output directory
+        cp -r /opt/6.6.3/gcc_64 $CONTAINER_DIR/binaries/ && \
+        
+        # Fix permissions (make all files readable/writable)
+        chmod -R a+rwX $CONTAINER_DIR/build $CONTAINER_DIR/binaries && \
         
         echo \"Build completed. Binary copied to binaries/\$BINARY_NAME\"
     "

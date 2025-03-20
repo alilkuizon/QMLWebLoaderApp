@@ -28,5 +28,8 @@ unix {
     INCLUDEPATH += /usr/include/libudev
 
     QMAKE_POST_LINK += chmod 755 $$DESTDIR/$$TARGET
+
+    QMAKE_LFLAGS += -Wl,-rpath,\'\$$ORIGIN/gcc_64/lib\'
+    QMAKE_LFLAGS += -Wl,--disable-new-dtags
 }
 
