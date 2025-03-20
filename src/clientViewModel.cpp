@@ -42,22 +42,36 @@ void ClientViewModel::toggleTimer()
 void ClientViewModel::fetchUSBDeviceList()
 {
     m_devices.clear();
-
-    // ADD Fetching code here
     m_devices = getUsbDevicesList();
-    qDebug() << "DEVICES" << m_devices;
 
-    // QString deviceInfo =
-    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
+    // QString deviceInfo = QString("Vendor: ") + QString("vendor") + QString(" Product: ") +
+    //                      QString("product") + QString("product") + QString("product") +
+    //                      QString("product") + QString("product");
     // m_devices.append(deviceInfo);
 
     // QString deviceInfo1 =
     //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
     // m_devices.append(deviceInfo1);
 
-    // QString deviceInfo2 =
+    // QString deviceInfo9 =
     //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
-    // m_devices.append(deviceInfo2);
+    // m_devices.append(deviceInfo9);
+
+    // QString deviceInfo8 =
+    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
+    // m_devices.append(deviceInfo8);
+
+    // QString deviceInfo7 =
+    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
+    // m_devices.append(deviceInfo7);
+
+    // QString deviceInfo6 =
+    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
+    // m_devices.append(deviceInfo6);
+
+    // QString deviceInfo5 =
+    //     QString("Vendor: ") + QString("vendor") + QString(" Product: ") + QString("product");
+    // m_devices.append(deviceInfo5);
 
     emit devicesChanged();
 }
@@ -99,24 +113,47 @@ QStringList ClientViewModel::getUsbDevicesList()
 
         if (dev)
         {
-            const char *vendor = udev_device_get_sysattr_value(dev, "idVendor");
-            const char *product = udev_device_get_sysattr_value(dev, "idProduct");
-            const char *manufacturer = udev_device_get_sysattr_value(dev, "manufacturer");
-            const char *product_name = udev_device_get_sysattr_value(dev, "product");
+            // const char *vendor = udev_device_get_sysattr_value(dev, "idVendor");
+            // const char *product = udev_device_get_sysattr_value(dev, "idProduct");
+            // const char *manufacturer = udev_device_get_sysattr_value(dev, "manufacturer");
+            // const char *product_name = udev_device_get_sysattr_value(dev, "product");
 
-            QString deviceInfo;
-            if (manufacturer && product_name)
-            {
-                deviceInfo = QString("%1 %2").arg(manufacturer, product_name);
-            }
-            else if (vendor && product)
-            {
-                deviceInfo = QString("Vendor: %1, Product: %2").arg(vendor, product);
-            }
-            else
-            {
-                deviceInfo = QString("Unknown USB device at %1").arg(path);
-            }
+            // QString deviceInfo;
+            // if (manufacturer && product_name)
+            // {
+            //     deviceInfo = QString("%1 %2").arg(manufacturer, product_name);
+            // }
+            // else if (vendor && product)
+            // {
+            //     deviceInfo = QString("Vendor: %1, Product: %2").arg(vendor, product);
+            // }
+            // else
+            // {
+            //     deviceInfo = QString("Unknown USB device at %1").arg(path);
+            // }
+
+            // deviceList.append(deviceInfo);
+            // udev_device_unref(dev);
+
+            const char *vendor = udev_device_get_sysattr_value(dev, "idVendor");   // Vendor ID
+            const char *product = udev_device_get_sysattr_value(dev, "idProduct"); // Product ID
+            const char *manufacturer =
+                udev_device_get_sysattr_value(dev, "manufacturer"); // Human-readable Vendor
+            const char *product_name =
+                udev_device_get_sysattr_value(dev, "product");  // Human-readable Product
+            const char *devpath = udev_device_get_devpath(dev); // Get device location
+
+            // Fallback to vendor/product ID if manufacturer/product_name is missing
+            QString usbModel =
+                product_name ? QString(product_name)
+                             : (product ? QString("Product ID: %1").arg(product) : "Unknown Model");
+            QString usbVendor =
+                manufacturer ? QString(manufacturer)
+                             : (vendor ? QString("Vendor ID: %1").arg(vendor) : "Unknown Vendor");
+            QString usbLocation = devpath ? QString(devpath) : "Unknown Location";
+
+            QString deviceInfo = QString("Model: %1, Vendor: %2, Location: %3")
+                                     .arg(usbModel, usbVendor, usbLocation);
 
             deviceList.append(deviceInfo);
             udev_device_unref(dev);

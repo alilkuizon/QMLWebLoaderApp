@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
     QQuickView view;
     ClientViewModel viewModel(&view);
     viewModel.renderView();
-    viewModel.fetchUSBDeviceList();
 
     WebServer server(&view);
     server.findServerPort();
