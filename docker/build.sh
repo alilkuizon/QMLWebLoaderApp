@@ -16,6 +16,21 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
+# Check if the Docker image exists locally
+if [[ "$(docker images -q "$DOCKER_IMAGE" 2> /dev/null)" == "" ]]; then
+    echo "Docker image '$DOCKER_IMAGE' not found locally. Building from Dockerfile..."
+
+    # Check if Dockerfile exists in the script directory
+    if [[ -f "$SCRIPT_DIR/Dockerfile" ]]; then
+        docker build -t "$DOCKER_IMAGE" "$SCRIPT_DIR"
+        echo "Docker image '$DOCKER_IMAGE' built successfully."
+    else
+        echo "Dockerfile not found in '$SCRIPT_DIR'. Cannot build Docker image."
+        exit 1
+    fi
+else
+    echo "Docker image '$DOCKER_IMAGE' found locally."
+fi
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
 
