@@ -20,7 +20,7 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
    
    ```bash
    sudo ./run_all.sh
-3. **Wait for setup to finish and it will automatically run the QML Loader Application. Re-run the application by running the run-all.sh script again**
+3. **Wait for setup to finish and it will automatically run the QML Loader Application. When exited, re-run the application by running the run-all.sh script again**
 4. **(Optional)When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
    ```bash
