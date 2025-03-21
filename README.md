@@ -9,15 +9,19 @@ A local host webserver can be run using the Simple Web Server repo found here:
 https://github.com/alilkuizon/SimpleWebServer
 
 ## Quick Setup Instruction
-The quick setup method uses run_all.sh runs both a webserver and the client and loads the QML Loader Application. All dependencies are generated in a folder called applicationFolder
+The quick setup method uses run_all.sh runs both a webserver (Repo stated above) and the client(this repo QML Web Loader App). 
+All dependencies are generated in a folder called applicationFolder. 
 1. **Add execute permissions to the run_all.sh script**
 
    ```bash
    chmod +x run_all.sh
-2. **Run the script**
+2. **Run the script (Use sudo for proper access)**
    
    ```bash
    sudo ./run_all.sh
+3. **Wait for setup to finish and it will automatically run the QML Loader Application**
+4. **NOTE: TO ENSURE RELIABILITY OF DEPENDENCIES ALWAYS RUN THE APP THROUGH THE run_all.sh script**
+5. **Binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
 
 ## Manual Setup Instructions (Only use when Quick Setup doesn't work)
