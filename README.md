@@ -10,7 +10,7 @@ https://github.com/alilkuizon/SimpleWebServer
 
 ## Quick Setup Instruction
 The quick setup method uses run_all.sh runs both a webserver (Repo stated above) and the client(this repo QML Web Loader App). 
-All dependencies are generated in a folder called applicationFolder. 
+Note: run_all.sh is independent and can be copied into any directories and ran in isolation. It will generate a folder called applicationFolder which contains the dependencies
 1. **Add execute permissions to the run_all.sh script**
 
    ```bash
