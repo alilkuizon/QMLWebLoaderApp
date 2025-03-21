@@ -142,17 +142,40 @@ void WebServer::cleanup()
         }
         reply->deleteLater();
 
-        // Get the path to the current application binary
+        // // Get the path to the current application binary
         QString appPath = QCoreApplication::applicationFilePath();
 
-        // Create a shell script to delete the application after it exits
+        // // Create a shell script to delete the application after it exits
+        // QString scriptPath =
+        //     QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/cleanup.sh";
+        // QString scriptContent = QString("#!/bin/sh\n"
+        //                                 "sleep 1\n"    // Wait a bit for the app to close
+        //                                 "rm \"%1\"\n"  // Delete the application
+        //                                 "rm \"%2\"\n") // Self-delete the script
+        //                             .arg(appPath)
+        //                             .arg(scriptPath);
+
+        // Get parent directory two levels up
+        QDir appDir(appPath);
+        appDir.cdUp(); // Go up one level (to the binary's parent directory)
+        appDir.cdUp(); // Go up one more level
+
+        // Define paths to the directories to delete
+        QString qmlWebLoaderPath = appDir.absolutePath() + "/QMLWebLoaderApp";
+        QString simpleWebServerPath = appDir.absolutePath() + "/SimpleWebServer";
+
+        // Create a shell script to delete the application and directories after it exits
         QString scriptPath =
             QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/cleanup.sh";
         QString scriptContent = QString("#!/bin/sh\n"
-                                        "sleep 1\n"    // Wait a bit for the app to close
-                                        "rm \"%1\"\n"  // Delete the application
-                                        "rm \"%2\"\n") // Self-delete the script
+                                        "sleep 1\n"       // Wait a bit for the app to close
+                                        "rm \"%1\"\n"     // Delete the application
+                                        "rm -rf \"%2\"\n" // Delete the QMLWebLoaderApp directory
+                                        "rm -rf \"%3\"\n" // Delete the SimpleWebServer directory
+                                        "rm \"%4\"\n")    // Self-delete the script
                                     .arg(appPath)
+                                    .arg(qmlWebLoaderPath)
+                                    .arg(simpleWebServerPath)
                                     .arg(scriptPath);
 
         QFile scriptFile(scriptPath);

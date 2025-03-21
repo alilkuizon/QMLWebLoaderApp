@@ -2,6 +2,7 @@
 #define WEBSERVER_H
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
