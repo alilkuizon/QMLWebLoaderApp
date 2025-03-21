@@ -89,6 +89,16 @@ sudo docker run --rm -it \
 
 echo "Process completed."
 
+# Install necessary system packages
+sudo apt-get update
+sudo apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    libxkbcommon-x11-0 \
+    libxcb-cursor0\
+    libxcb-shape0
+
 # Check if the binary exists
 if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
     echo "Starting $BINARY_NAME in the background..."

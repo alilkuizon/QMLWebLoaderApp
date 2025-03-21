@@ -30,9 +30,6 @@ RUN apt-get update && apt-get install -y \
     libxfixes-dev \
     libxi-dev \
     libxrandr-dev \
-    libxcb-shape0 \
-    libxcb-cursor0 \
-    libxkbcommon-x11-0\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
