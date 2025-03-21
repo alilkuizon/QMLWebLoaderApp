@@ -38,7 +38,12 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
    
     ```bash
     git clone https://github.com/alilkuizon/QMLWebLoaderApp.git
-    
+
+4. **Go into the cloned project**
+
+   ```bash
+    cd QMLWebLoaderApp
+   
 4. **In this repository edit server_port.txt and put the port number from step 2**
 5. **Go to the docker folder and add execute permissions to build.sh**
     
