@@ -97,7 +97,8 @@ sudo apt-get install -y \
     gnupg \
     libxkbcommon-x11-0 \
     libxcb-cursor0\
-    libxcb-shape0
+    libxcb-shape0 \
+    libxcb-icccm4
 
 # Check if the binary exists
 if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
