@@ -24,7 +24,7 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
 4. **When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
    ```bash
-   cd /applicationFolder/QMLWebLoaderApp/binaries
+   cd /applicationFolder/QMLWebLoaderApp/binaries &&
    sudo ./QMLWebLoaderApp
 
 
