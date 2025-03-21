@@ -23,5 +23,5 @@ https://github.com/alilkuizon/SimpleWebServer
 
     ```bash
    ./build.sh
-6. **The executable application is located in the binaries Folder created after running build.sh**
+6. **The executable application is also located in the binaries Folder created after running build.sh**
 7. **(Optional) Execute with sudo if there are permission errors**
