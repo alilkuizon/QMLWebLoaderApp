@@ -27,7 +27,7 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
    cd /applicationFolder/QMLWebLoaderApp/binaries &&
    sudo ./QMLWebLoaderApp
 
-5. Use run_all.sh to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.
+5. **Use 'run_all.sh' to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.**
 
    ```bash
    cd /applicationFolder/SimpleWebServer &&
