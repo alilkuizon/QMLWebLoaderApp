@@ -29,23 +29,24 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
 ## Manual Setup Instructions (Only use when Quick Setup doesn't work)
 
 1. **Initialize a webserver first. Follow the SimpleWebServer Repo Instructions**
-2. **Clone this repository into your local directory**
-   
-    ```bash
-    git clone https://github.com/alilkuizon/QMLWebLoaderApp.git
-4. **When running the webserver take note of the port number printed on the command line**:
+2. **When running the webserver take note of the port number printed on the command line**:
 
    ```bash
    Example: Server is running on port 13117
 
-5. **In this repository edit server_port.txt and put the port number from step 2**
-6. **Go to the docker folder and add execute permissions to build.sh**
+3. **Clone this repository into your local directory**
+   
+    ```bash
+    git clone https://github.com/alilkuizon/QMLWebLoaderApp.git
+    
+4. **In this repository edit server_port.txt and put the port number from step 2**
+5. **Go to the docker folder and add execute permissions to build.sh**
     
     ```bash
    chmod +x build.sh
-7. **Execute build.sh and it will build and run the application**
+6. **Execute build.sh and it will build and run the application**
 
     ```bash
    ./build.sh
-8. **The executable application is also located in the binaries Folder created after running build.sh**
-9. **(Optional) Execute with sudo if there are permission errors**
+7. **The executable application is also located in the binaries Folder created after running build.sh**
+8. **(Optional) Execute with sudo if there are permission errors**
