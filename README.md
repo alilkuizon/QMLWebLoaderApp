@@ -21,13 +21,13 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
    ```bash
    sudo ./run_all.sh
 3. **Wait for setup to finish and it will automatically run the QML Loader Application. When exited, re-run the application by running the run-all.sh script again**
-4. **(Optional)When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
+4. **(Optional) When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
    ```bash
    cd /applicationFolder/QMLWebLoaderApp/binaries &&
    sudo ./QMLWebLoaderApp
 
-5. **(Optional)Use 'run_all.sh' to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.**
+5. **(Optional) Use 'run_all.sh' to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.**
 
    ```bash
    cd /applicationFolder/SimpleWebServer &&
