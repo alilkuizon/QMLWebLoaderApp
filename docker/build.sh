@@ -90,6 +90,7 @@ sudo docker run --rm -it \
 echo "Process completed."
 
 # Install necessary system packages
+echo "Installing Binary Runtime packages"
 sudo apt-get update
 sudo apt-get install -y \
     ca-certificates \
@@ -98,7 +99,8 @@ sudo apt-get install -y \
     libxkbcommon-x11-0 \
     libxcb-cursor0\
     libxcb-shape0 \
-    libxcb-icccm4
+    libxcb-icccm4 \
+    libxcb-keysyms1
 
 # Check if the binary exists
 if [ -f "$OUTPUT_DIR/$BINARY_NAME" ]; then
