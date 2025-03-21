@@ -22,7 +22,7 @@ All dependencies are generated in a folder called applicationFolder.
 3. **Wait for setup to finish and it will automatically run the QML Loader Application**
 4. **Binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
-   **NOTE: TO ENSURE RELIABILITY OF DEPENDENCIES ALWAYS RUN THE APP THROUGH THE run_all.sh script**
+   NOTE: TO ENSURE RELIABILITY OF DEPENDENCIES ALWAYS RUN THE APP THROUGH THE run_all.sh script
 
 
 ## Manual Setup Instructions (Only use when Quick Setup doesn't work)
