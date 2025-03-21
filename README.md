@@ -17,7 +17,8 @@ The quick setup method uses run_all.sh runs both a webserver and the client and 
    ```bash
    ./run_all.sh
 
-## Manual Setup Instructions
+
+## Manual Setup Instructions (Only use when Quick Setup doesn't work)
 
 1. **Initialize a webserver first. Follow the SimpleWebServer Repo Instructions**
 2. **When running the webserver take note of the port number printed on the command line**:
