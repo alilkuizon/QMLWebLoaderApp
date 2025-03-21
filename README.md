@@ -12,22 +12,24 @@ https://github.com/alilkuizon/SimpleWebServer
 The quick setup method uses run_all.sh runs both a webserver (Repo stated above) and the client(this repo QML Web Loader App). 
 
 Note: 'run_all.sh' is independent and can be copied into any directories and ran in isolation. It will generate a folder called applicationFolder which contains the dependencies
-1. **Add execute permissions to the run_all.sh script**
+1. **Skip the cloning process and just download "run_all.sh" file.**
+
+2. **Go into the directory of downloaded run_all script, add execute permissions to run it**
 
    ```bash
    chmod +x run_all.sh
-2. **Run the script (Use sudo for proper access)**
+3. **Run the script (Use sudo for proper access)**
    
    ```bash
    sudo ./run_all.sh
-3. **Wait for setup to finish and it will automatically run the QML Loader Application. When exited, re-run the application by running the run-all.sh script again**
-4. **(Optional) When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
+4. **Wait for setup to finish and it will automatically run the QML Loader Application. When exited, re-run the application by running the run-all.sh script again**
+5. **(Optional) When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
 
    ```bash
    cd /applicationFolder/QMLWebLoaderApp/binaries &&
    sudo ./QMLWebLoaderApp
 
-5. **(Optional) Use 'run_all.sh' to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.**
+6. **(Optional) Use 'run_all.sh' to run and re-run the application as it automatically runs the webserver for you. When manually running binaries from the binaries folder you have to start the server again yourself when it is killed.**
 
    ```bash
    cd /applicationFolder/SimpleWebServer &&
