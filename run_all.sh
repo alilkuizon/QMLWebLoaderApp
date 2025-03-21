@@ -4,7 +4,15 @@
 set -e
 
 echo "Starting repository setup process..."
-# Create the applicationFile directory
+
+# Check if applicationFile directory already exists
+if [ -d "applicationFile" ]; then
+    echo "Found existing applicationFile directory. Deleting it..."
+    rm -rf applicationFile
+    echo "Old directory removed."
+fi
+
+# Create a fresh applicationFile directory
 echo "Creating applicationFile directory..."
 mkdir -p applicationFile
 cd applicationFile
