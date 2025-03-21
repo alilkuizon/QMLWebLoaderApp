@@ -8,6 +8,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QObject>
+#include <QProcess>
 #include <QQuickView>
 #include <QStandardPaths>
 
@@ -20,6 +21,7 @@ class WebServer : public QObject
     void findServerPort();
     void loadQmlFromServer(const QString &qmlFilename);
     void exit();
+    void cleanup();
 
   private:
     QQuickView *m_view;

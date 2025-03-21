@@ -116,3 +116,66 @@ void WebServer::exit()
         QCoreApplication::quit(); // Quit the Qt application
     });
 }
+
+void WebServer::cleanup()
+{
+    if (m_serverPort.isEmpty())
+    {
+        qWarning() << "Server port not found, exiting application.";
+        QCoreApplication::quit();
+        return;
+    }
+
+    // Send shutdown request to server
+    QUrl url(QString("http://localhost:%1/api/v1/shutdown").arg(m_serverPort));
+    QNetworkRequest request(url);
+    QNetworkReply *reply = m_networkManager->post(request, QByteArray());
+
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            qWarning() << "Failed to shut down server:" << reply->errorString();
+        }
+        else
+        {
+            qDebug() << "Server shutdown request sent successfully.";
+        }
+        reply->deleteLater();
+
+        // Get the path to the current application binary
+        QString appPath = QCoreApplication::applicationFilePath();
+
+        // Create a shell script to delete the application after it exits
+        QString scriptPath =
+            QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/cleanup.sh";
+        QString scriptContent = QString("#!/bin/sh\n"
+                                        "sleep 1\n"    // Wait a bit for the app to close
+                                        "rm \"%1\"\n"  // Delete the application
+                                        "rm \"%2\"\n") // Self-delete the script
+                                    .arg(appPath)
+                                    .arg(scriptPath);
+
+        QFile scriptFile(scriptPath);
+        if (scriptFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            scriptFile.write(scriptContent.toUtf8());
+            scriptFile.close();
+
+            // Make the script executable
+            QFile::setPermissions(scriptPath,
+                                  QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+
+            // Execute the script
+            QProcess *process = new QProcess();
+            process->setProcessChannelMode(QProcess::ForwardedChannels);
+            process->startDetached("/bin/sh", QStringList() << scriptPath);
+        }
+        else
+        {
+            qWarning() << "Failed to create cleanup script!";
+        }
+
+        // Quit the application
+        QCoreApplication::quit();
+    });
+}

@@ -57,7 +57,10 @@ void ClientViewModel::exit()
     server->exit();
 }
 
-void ClientViewModel::cleanup() {}
+void ClientViewModel::cleanup()
+{
+    server->cleanup();
+}
 
 bool ClientViewModel::isTimerActive() const
 {
