@@ -15,7 +15,7 @@ The quick setup method uses run_all.sh runs both a webserver and the client and 
 2. **Run the script**
    
    ```bash
-   ./run_all.sh
+   sudo ./run_all.sh
 
 
 ## Manual Setup Instructions (Only use when Quick Setup doesn't work)
