@@ -1,7 +1,8 @@
 
 # QML Web Loader
 
-This application loads qml files served in webservers. Developed and tested in Ubuntu 24.04. Build Process only supports Ubuntu 
+This application loads qml files served in webservers. Developed and tested in Ubuntu 24.04. 
+**Build Process only supports Native Linux(Ubuntu) and Linux Subsytem Windows (Ubuntu).**
 
 A local host webserver can be run using the Simple Web Server repo found here:
 https://github.com/alilkuizon/SimpleWebServer
