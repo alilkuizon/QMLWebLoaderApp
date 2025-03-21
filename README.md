@@ -21,7 +21,11 @@ Note: 'run_all.sh' is independent and can be copied into any directories and ran
    ```bash
    sudo ./run_all.sh
 3. **Wait for setup to finish and it will automatically run the QML Loader Application**
-4. **Binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
+4. **When needed, binaries are available in /applicationFolder/QMLWebLoaderApp/binaries**
+
+   ```bash
+   cd /applicationFolder/QMLWebLoaderApp/binaries
+   sudo ./QMLWebLoaderApp
 
 
 ## Manual Setup Instructions (Only use when Quick Setup doesn't work)
