@@ -6,7 +6,18 @@ This application loads qml files served in webservers. Developed and tested in U
 A local host webserver can be run using the Simple Web Server repo found here:
 https://github.com/alilkuizon/SimpleWebServer
 
-## Setup Instructions
+## Quick Setup Instruction
+The quick setup method uses run_all.sh runs both a webserver and the client and loads the QML Loader Application. All dependencies are generated in a folder called applicationFolder
+1. **Add execute permissions to the run_all.sh script**
+
+   ```bash
+   chmod +x run_all.sh
+2. **Run the script**
+   
+   ```bash
+   ./run_all.sh
+
+## Manual Setup Instructions
 
 1. **Initialize a webserver first. Follow the SimpleWebServer Repo Instructions**
 2. **When running the webserver take note of the port number printed on the command line**:
